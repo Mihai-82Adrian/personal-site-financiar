@@ -1,103 +1,158 @@
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Button } from '@/components/ui/Button';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const services = [
+    {
+      id: 'design-grafic',
+      title: 'Design Grafic',
+      description: 'Design pentru haine și accesorii personalizate',
+      icon: '🎨',
+      href: '/servicii/design-grafic',
+    },
+    {
+      id: 'web-development',
+      title: 'Web Development',
+      description: 'Site-uri de prezentare moderne și responsive',
+      icon: '💻',
+      href: '/servicii/web-development',
+    },
+    {
+      id: 'mcp-calculatoare',
+      title: 'Microcalculatoare',
+      description: 'Sisteme personalizate și consultanță tehnică',
+      icon: '🖥️',
+      href: '/servicii/mcp-calculatoare',
+    },
+    {
+      id: 'finanzbuchhalter',
+      title: 'Finanzbuchhalter',
+      description: 'Servicii complete de contabilitate pentru Germania',
+      icon: '📊',
+      href: '/servicii/finanzbuchhalter',
+    },
+    {
+      id: 'business-planning',
+      title: 'Business Planning',
+      description: 'Consultanță și planificare strategică',
+      icon: '📈',
+      href: '/servicii/business-planning',
+    },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const tools = [
+    { name: 'Calculator Impozite', icon: '🧮', href: '/instrumente/calculator-impozite' },
+    { name: 'Planificator Buget', icon: '💰', href: '/instrumente/planificator-buget' },
+    { name: 'Calculator Amortizare', icon: '📉', href: '/instrumente/calculator-amortizare' },
+    { name: 'Simulator Investiții', icon: '📊', href: '/instrumente/simulator-investitii' },
+    { name: 'Convertor Valutar', icon: '💱', href: '/instrumente/convertor-valutar' },
+  ];
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-accent to-secondary opacity-90" />
+        <div className="absolute inset-0 bg-[url('/images/background/CFO.webp')] bg-cover bg-center opacity-10" />
+        
+        <div className="container mx-auto px-4 relative z-10 text-center text-white">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+            Servicii Financiar-Contabile
+            <span className="block text-3xl md:text-4xl mt-4 text-secondary">
+              pentru Germania 🇩🇪
+            </span>
+          </h1>
+          
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-white/90">
+            Expertiză în contabilitate, consultanță financiară și soluții digitale moderne.
+            Partenerul tău de încredere pentru succesul afacerii tale.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/cv">
+              <Button size="lg" variant="secondary" className="text-lg">
+                Vezi CV-ul meu
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button size="lg" variant="glass" className="text-lg">
+                Contactează-mă
+              </Button>
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      </section>
+
+      {/* Services Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto max-w-7xl">
+          <h2 className="text-4xl font-bold text-center mb-12 text-primary">
+            Serviciile Mele
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service) => (
+              <Link key={service.id} href={service.href}>
+                <Card variant="brutal" className="h-full hover:translate-y-[-4px] transition-transform duration-300 cursor-pointer">
+                  <CardHeader>
+                    <div className="text-4xl mb-4">{service.icon}</div>
+                    <CardTitle>{service.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-base">
+                      {service.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tools Section */}
+      <section className="py-20 px-4 bg-surface">
+        <div className="container mx-auto max-w-7xl">
+          <h2 className="text-4xl font-bold text-center mb-12 text-primary">
+            Instrumente Financiare Gratuite
+          </h2>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {tools.map((tool) => (
+              <Link key={tool.href} href={tool.href}>
+                <Card variant="glass" className="text-center hover:scale-105 transition-transform duration-300 cursor-pointer h-full">
+                  <CardContent className="p-6">
+                    <div className="text-3xl mb-3">{tool.icon}</div>
+                    <p className="text-sm font-medium">{tool.name}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">
+            Hai să lucrăm împreună!
+          </h2>
+          <p className="text-lg mb-8 text-muted">
+            Fie că ai nevoie de servicii de contabilitate, consultanță financiară sau soluții digitale,
+            sunt aici să te ajut să-ți duci afacerea la următorul nivel.
+          </p>
+          <Link href="/contact">
+            <Button size="lg" variant="primary" className="text-lg">
+              Programează o consultație gratuită
+            </Button>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
