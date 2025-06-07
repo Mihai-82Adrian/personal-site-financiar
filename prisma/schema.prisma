@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String   @id @default(cuid())
+  email           String   @unique
+  name            String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  calculations    Calculation[]
+  consultations   Consultation[]
+  documents       Document[]
+  
+  @@map("users")
+}
+
+model Calculation {
+  id          String          @id @default(cuid())
+  type        CalculationType
+  inputData   Json
+  results     Json
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  
+  userId      String?
+  user        User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  @@map("calculations")
+}
+
+model Consultation {
+  id          String            @id @default(cuid())
+  type        ConsultationType
+  status      ConsultationStatus
+  scheduledAt DateTime
+  duration    Int               // minutes
+  notes       String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  
+  userId      String
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("consultations")
+}
+
+model Document {
+  id          String        @id @default(cuid())
+  filename    String
+  originalName String
+  mimeType    String
+  size        Int
+  uploadPath  String
+  processed   Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+  
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("documents")
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String
+  excerpt     String?
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  tags        Tag[]
+  
+  @@map("blog_posts")
+}
+
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+  slug  String @unique
+  
+  posts BlogPost[]
+  
+  @@map("tags")
+}
+
+enum CalculationType {
+  TAX_CALCULATOR
+  BUDGET_PLANNER
+  DEPRECIATION_CALCULATOR
+  INVESTMENT_SIMULATOR
+  CURRENCY_CONVERTER
+}
+
+enum ConsultationType {
+  FINANCIAL_ADVICE
+  TAX_CONSULTATION
+  BUSINESS_PLANNING
+  VIDEO_CALL
+}
+
+enum ConsultationStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}

@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(true)",
+      "Bash(rm:*)",
+      "Bash(ls:*)",
+      "Bash(mv:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npx husky init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)"
+    ],
+    "deny": []
+  }
+}
