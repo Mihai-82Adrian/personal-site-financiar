@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import PageTransition from '@/components/animations/PageTransition';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,9 +41,11 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        <PageTransition>
+          <main className="min-h-screen">
+            {children}
+          </main>
+        </PageTransition>
         <Footer />
       </body>
     </html>
